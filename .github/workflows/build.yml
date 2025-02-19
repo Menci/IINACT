@@ -22,10 +22,8 @@ jobs:
     - name: Download Dalamud
       shell: pwsh
       run: |
-        $versionInfo = Invoke-RestMethod -Uri "https://aonyx.ffxiv.wang/Dalamud/Release/VersionInfo"
-        $downloadUrl = $versionInfo.downloadUrl
-        Invoke-WebRequest -Uri $downloadUrl -OutFile latest.7z
-        7z x latest.7z -o/tmp/dalamud
+        Invoke-WebRequest -Uri https://goatcorp.github.io/dalamud-distrib/stg/latest.zip -OutFile latest.zip
+        Expand-Archive -Force latest.zip /tmp/dalamud
     - name: Build
       run: dotnet build -c release
     - name: Prepare Build Artifact
